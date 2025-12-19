@@ -97,7 +97,7 @@ CREATE TABLE CLIENT (
     ville           VARCHAR2(15),
     telFixe         VARCHAR2(10),
     telMob          VARCHAR2(10)    NOT NULL,
-    email           VARCHAR2(30)   NOT NULL
+    email           VARCHAR2(30)    NOT NULL
 );
 
 
@@ -106,9 +106,9 @@ CREATE TABLE CLIENT (
 -------------------------------------------------------------------
 
 CREATE TABLE SEJOUR (
-    code            VARCHAR2(8)       CONSTRAINT pk_sejour PRIMARY KEY,
+    code            VARCHAR2(8)     CONSTRAINT pk_sejour PRIMARY KEY,
     type            VARCHAR2(10)    DEFAULT 'Theme' NOT NULL,
-    intitule        VARCHAR2(20)   NOT NULL,
+    intitule        VARCHAR2(20)    NOT NULL,
     lieu            VARCHAR2(20)    NOT NULL,
     dateArrivee     DATE            NOT NULL,
     heureArrivee    VARCHAR2(5)     NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE SEJOUR (
     heureDepart     VARCHAR2(5)     NOT NULL,
     nomContact      VARCHAR2(15)    NOT NULL,
     telContact      VARCHAR2(10)    NOT NULL,
-    emailContact    VARCHAR2(30)   NOT NULL,
+    emailContact    VARCHAR2(30)    NOT NULL,
     tarifHS         NUMBER(8,2)     NOT NULL,
     tarifS          NUMBER(8,2)     NOT NULL,
     CONSTRAINT chk_sejour
@@ -136,9 +136,9 @@ CREATE TABLE RESERVATION (
     codeClient      NUMBER(6)       NOT NULL,
     codeSejour      VARCHAR2(8),
     CONSTRAINT fk_res_client
-        FOREIGN KEY (codeClient) REFERENCES CLIENT(code),
+        FOREIGN KEY (codeClient)    REFERENCES CLIENT(code),
     CONSTRAINT fk_res_sejour
-        FOREIGN KEY (codeSejour) REFERENCES SEJOUR(code)
+        FOREIGN KEY (codeSejour)    REFERENCES SEJOUR(code)
 );
 
 CREATE TABLE PAIEMENT (
@@ -149,9 +149,9 @@ CREATE TABLE PAIEMENT (
     codeRes         NUMBER(8)       NOT NULL,
     codeModeReg     NUMBER(4)       NOT NULL,
     CONSTRAINT fk_paie_reservation
-        FOREIGN KEY (codeRes) REFERENCES RESERVATION(numero),
+        FOREIGN KEY (codeRes)       REFERENCES RESERVATION(numero),
     CONSTRAINT fk_paie_modereg
-        FOREIGN KEY (codeModeReg) REFERENCES MODEREGLEMENT(code)
+        FOREIGN KEY (codeModeReg)   REFERENCES MODEREGLEMENT(code)
 );
 
 
@@ -173,9 +173,9 @@ CREATE TABLE LOUER (
     CONSTRAINT pk_louer
         PRIMARY KEY (numRes, codeChambre, codeSaison, dateDebSai, dateFinSai),
     CONSTRAINT fk_louer_reservation
-        FOREIGN KEY (numRes) REFERENCES RESERVATION(numero),
+        FOREIGN KEY (numRes)        REFERENCES RESERVATION(numero),
     CONSTRAINT fk_louer_chambre
-        FOREIGN KEY (codeChambre) REFERENCES CHAMBRE(code),
+        FOREIGN KEY (codeChambre)   REFERENCES CHAMBRE(code),
     CONSTRAINT fk_louer_saison
         FOREIGN KEY (codeSaison, dateDebSai, dateFinSai)
         REFERENCES SAISON(code, dateDebSai, dateFinSai),
@@ -187,7 +187,7 @@ CREATE TABLE LOUER (
 -- 2. CLASSER
 
 CREATE TABLE CLASSER (
-    codeSejour      VARCHAR2(8)       NOT NULL,
+    codeSejour      VARCHAR2(8)     NOT NULL,
     codeThematique  NUMBER(4)       NOT NULL,
     CONSTRAINT pk_classer
         PRIMARY KEY (codeSejour, codeThematique),
@@ -201,9 +201,9 @@ CREATE TABLE CLASSER (
 -- 3. PLANIFIER
 
 CREATE TABLE PLANIFIER (
-    codePeriode         VARCHAR2(7)       NOT NULL,
-    codeSejour          VARCHAR2(8)       NOT NULL,
-    libelleProgramme    VARCHAR2(40)   NOT NULL,
+    codePeriode         VARCHAR2(7)     NOT NULL,
+    codeSejour          VARCHAR2(8)     NOT NULL,
+    libelleProgramme    VARCHAR2(40)    NOT NULL,
     CONSTRAINT pk_planifier
         PRIMARY KEY (codePeriode, codeSejour),
     CONSTRAINT fk_planifier_periode
@@ -283,7 +283,7 @@ INSERT INTO REGION VALUES (4, 'Bearn');
 INSERT INTO REGION VALUES (5, 'Sud Landes');
 
 -- COMMUNE
-INSERT INTO COMMUNE VALUES (1,  'Larrau',                1);
+INSERT INTO COMMUNE VALUES (1,  'Larrau',                 1);
 INSERT INTO COMMUNE VALUES (2,  'Tardets-Sorholus',       1);
 INSERT INTO COMMUNE VALUES (3,  'Mauleon-Licharre',       1);
 INSERT INTO COMMUNE VALUES (4,  'Saint-Jean-Pied-de-Port',2);
