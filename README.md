@@ -20,7 +20,7 @@ Le second livrable (livrable 3) sera constitué de 16 requêtes métiers classé
 
 |** Questions du 19/12/2025 **
 |
-|Requêtes métier ?  **Interrssant pour l'interressant car c'est lui qui fera ses requetes**
+|Requêtes métier ?  **Interressant pour l'interressant car c'est lui qui fera ses requetes**
 |Classer par mécanisme ? **jointure, GROUP By, ...**
 |Chacune étant exprimée en français et en SQL :
 |   Est ce que cela correspond à un commentaire au dessus de la requête comme en C++ ? **OUI, donner le but et l'utilité**
