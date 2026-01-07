@@ -1,11 +1,27 @@
--- 2 jointures
+-- ** 2 jointures (Ced)
 
--- 2 ORDER BY dont au moins 1 mettant en œuvre plusieurs attributs de tri
+SELECT R.nbrePers
+FROM RESERVATION R
+JOIN CLIENT C ON C.code = R.CODECLIENT
+WHERE C.nom = 'Durand';
+-- Destinataire : 
+-- Interêt : Affiche le nombre de personne des reservations effectués par le client Durand
 
--- 3 GROUP BY (criteres statiques)
 
--- 3 GROUP BY HAVING dont 1 avec sous-requête dans le HAVING (critere dynamique)
+SELECT S.lieu
+FROM SEJOUR S
+JOIN RESERVATION R ON R.CODESEJOUR = S.CODE
+JOIN CLIENT C ON C.code = R.CODECLIENT
+WHERE C.nom = 'Durand';
+-- Destinataire : 
+-- Interêt : Affiche les villes dans lesquelles a deja réservé le client Durand
 
--- Fonctions d’agrégation : 2 requêtes avec une ou plusieurs fonctions d’agrégation (MIN, MAX, etc.)
+-- ** 2 ORDER BY dont au moins 1 mettant en œuvre plusieurs attributs de tri (Thibaut)
 
--- Sous-requêtes : 4 requêtes utilisant au niveau de l’imbrication des opérateurs de comparaison ainsi que les prédicats IN et NOT IN
+-- ** 3 GROUP BY (criteres statiques) (Bixente)
+
+-- ** 3 GROUP BY HAVING dont 1 avec sous-requête dans le HAVING (critere dynamique) (Bixente, Cédric, Thibaut)
+
+-- ** Fonctions d’agrégation : 2 requêtes avec une ou plusieurs fonctions d’agrégation (MIN, MAX, etc.) (Bixente)
+
+-- ** Sous-requêtes : 4 requêtes utilisant au niveau de l’imbrication des opérateurs de comparaison ainsi que les prédicats IN et NOT IN
