@@ -1,3 +1,10 @@
+----------------------------------------------------------------------------------------------------------
+-- TD2-TP4                                                                                              --
+-- groupe SAE n°42                                                                                      --
+-- noms des étudiants du groupe : Thibaut Fontaine ; Bixente Hiriart--Dicharry ; Cédric Rouillé         --
+-- date de remise : 13/01/26                                                                            --
+----------------------------------------------------------------------------------------------------------
+
 -- ** 2 jointures (Ced)
 
 SELECT R.nbrePers
