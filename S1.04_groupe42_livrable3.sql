@@ -27,4 +27,6 @@ GROUP BY CODEREGION NOT IN(SELECT h.code, h.TARIFCHAMBREBASE
                            FROM HEBERGEMENT h
                            WHERE TARIFCHAMBREBASE < 200);
 -- Destinataire : Un client
--- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à 1, le prix inférieur à 200 et trier par région. 
+-- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à
+-- 1, le prix inférieur à 200 et trier par région. 
+
