@@ -45,7 +45,11 @@ HAVING MIN(tarifBaseChambre) < 50;
 -- Destinataire : Client
 -- Intérêt : Permet au client de savoir quells hébergements proposent des chambres à moins de 50€
 
-SELECT h.code
-FROM HEBERGEMENT h
-JOIN COMMUNE c ON h.codeCommune=c.code
-WHERE c.code
+SELECT code
+FROM HEBERGEMENT
+WHERE codeCommune IN (SELECT codeCommune
+                      FROM HEBERGEMENT
+                      WHERE code='M18');
+-- Récupère le code des hébergements dans la même ville que "M18"
+-- Destinataire : Client
+-- Intérêt : Si un hébergement n'a pas assez de place, permet à l'utilisateur de connaitre les autres hébergements de la même ville pour pouvoir y réserver des chambres
