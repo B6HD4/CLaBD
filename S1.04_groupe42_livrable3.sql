@@ -48,7 +48,7 @@ ORDER BY TARIF ASC;
 
 -- GROUP BY --
 
--- 5 : Nombre de chambres par hébergement
+-- 5 : Nombre de chambre par hébergement 
 SELECT h.code, COUNT(c.code) AS nbChambre
 FROM HEBERGEMENT h
 JOIN CHAMBRE c ON h.code=c.codeHeberg
@@ -122,6 +122,7 @@ WHERE s.lieu = 'Larrau';
 -- Destinataire : Adhérent
 -- Intérêt : Permet d'avoir une idée de l'intérêt des clients pour les sejours à Larrau
 
+-- 12 : Prix minimum/maximum
 -- 12 : Prix minimum/maximum
 SELECT MIN(montant) AS prixMin, MAX(montant) AS prixMax
 FROM PAIEMENT;
