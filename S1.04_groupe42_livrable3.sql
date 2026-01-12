@@ -151,9 +151,7 @@ AND h.CODE NOT IN (
     FROM HEBERGEMENT h
     WHERE h.TARIFBASECHAMBRE > 200);
 -- Destinataire : Un client
--- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à
-<<<<<<< HEAD
--- 1, le prix inférieur à 200 et trier par région.
+-- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à 1, le prix inférieur à 200 et trier par région.
 
 -- 15 : Hebergements de la même ville
 SELECT code 
@@ -186,10 +184,3 @@ WHERE c.CODE IN (
   ORDER BY c.CODEREGION, c.CODE, h.CODE;
 -- Destinataire : Un client
 -- Intérêt : Tri les hébergement par commune et par région. 
-
-
-=======
--- 1, le prix inférieur à 200 et trier par région. 
-
--- OK
-
