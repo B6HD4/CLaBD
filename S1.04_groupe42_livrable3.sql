@@ -141,3 +141,16 @@ AND h.CODE NOT IN (
 -- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à
 -- 1, le prix inférieur à 200 et trier par région. 
 -- OK
+
+SELECT h.CODE, h.CODECOMMUNE, c.CODE, c.CODEREGION
+FROM HEBERGEMENT h
+INNER JOIN COMMUNE c ON h.CODECOMMUNE = c.CODE
+WHERE c.CODE IN (
+    SELECT c2.CODE
+    FROM COMMUNE c2
+    INNER JOIN REGION r ON c2.CODEREGION = r.CODE
+    WHERE r.CODE = 1)
+  ORDER BY c.CODEREGION, c.CODE, h.CODE;
+-- Destinataire : Un client
+-- Intérêt : Tri les hébergement par commune et par région. 
+
