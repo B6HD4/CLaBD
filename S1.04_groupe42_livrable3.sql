@@ -134,9 +134,9 @@ INNER JOIN EPI e ON h.CODEEPI = e.CODE
 INNER JOIN COMMUNE c ON h.CODECOMMUNE = c.CODE
 WHERE h.CODEEPI > 2
 AND h.CODE NOT IN (
-    SELECT h2.CODE
-    FROM HEBERGEMENT h2
-    WHERE h2.TARIFBASECHAMBRE > 200);
+    SELECT h.CODE
+    FROM HEBERGEMENT h
+    WHERE h.TARIFBASECHAMBRE > 200);
 -- Destinataire : Un client
 -- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à
 -- 1, le prix inférieur à 200 et trier par région. 
@@ -146,11 +146,12 @@ SELECT h.CODE, h.CODECOMMUNE, c.CODE, c.CODEREGION
 FROM HEBERGEMENT h
 INNER JOIN COMMUNE c ON h.CODECOMMUNE = c.CODE
 WHERE c.CODE IN (
-    SELECT c2.CODE
-    FROM COMMUNE c2
-    INNER JOIN REGION r ON c2.CODEREGION = r.CODE
+    SELECT c.CODE
+    FROM COMMUNE c
+    INNER JOIN REGION r ON c.CODEREGION = r.CODE
     WHERE r.CODE = 1)
   ORDER BY c.CODEREGION, c.CODE, h.CODE;
 -- Destinataire : Un client
 -- Intérêt : Tri les hébergement par commune et par région. 
+
 
