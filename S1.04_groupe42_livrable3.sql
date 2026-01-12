@@ -215,4 +215,4 @@ WHERE c.CODE IN (
 -- 1, le prix inférieur à 200 et trier par région. 
 
 -- OK
->>>>>>> 3605ff4 (Refactor SQL queries and comments in livrable3)
+
