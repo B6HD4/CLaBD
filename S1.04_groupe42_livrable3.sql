@@ -125,6 +125,7 @@ FROM PAIEMENT;
 
 -- Sous requètes --
 
+-- 15 : Hébergements même ville
 SELECT code -- Y V E S
 FROM HEBERGEMENT
 WHERE codeCommune IN (SELECT codeCommune
@@ -148,3 +149,4 @@ AND h.CODE NOT IN (
 -- 1, le prix inférieur à 200 et trier par région. 
 
 -- OK
+
