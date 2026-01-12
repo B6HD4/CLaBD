@@ -1,9 +1,9 @@
-SELECT h.CODE, h.NOMPROP, h.CODEEPI, e.CODE, e.DESCRIPTION
+SELECT h.CODE, h.NOMPROP, h.CODEEPI, e.CODE, e.DESCRIPTION, h.TARIFBASECHAMBRE
 FROM HEBERGEMENT h
 INNER JOIN EPI e ON h.CODEEPI = e.CODE
-ORDER BY e.CODE DESC;
+ORDER BY e.CODE DESC, h.TARIFBASECHAMBRE ASC;
 -- Destinataire : Un client
--- Interêt : Permet de trier les hébergements de manière décroissante en fonction du nombre d'épis.
+-- Interêt : Permet de trier les hébergements de manière décroissante en fonction du nombre d'épis et par prix croissant.
 -- OK
 
 
@@ -36,4 +36,5 @@ AND h.CODE NOT IN (
 -- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à
 -- 1, le prix inférieur à 200 et trier par région. 
 -- OK
+
 
