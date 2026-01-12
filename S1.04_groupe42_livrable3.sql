@@ -1,17 +1,10 @@
-SELECT COUNT(DISTINCT c.code) AS "nbClients"
-FROM CLIENT c
-JOIN RESERVATION r ON c.code=r.codeClient
-JOIN SEJOUR s ON r.codeSejour=s.code
-WHERE s.lieu = 'Larrau';
--- Calcule le nombre de clients ayant réservé un séjour a Larrau
--- Destinataire : Adhérent
--- Intérêt : Permet d'avoir une idée de l'intérêt des clients pour les sejours à Larrau
+-- Jointures --
 
-SELECT MIN(montant) AS prixMin, MAX(montant) AS prixMax
-FROM PAIEMENT;
--- Récupère les montants minimum et maxmimum payés
--- Destinataire : administrateur
--- Intérêt : Permet davoir une fourchette des prix payés par les clients 
+
+-- ORDER BY --
+
+
+-- GROUP BY --
 
 SELECT h.code, COUNT(c.code) AS nbChambre
 FROM HEBERGEMENT h
@@ -37,6 +30,9 @@ GROUP BY r.code;
 -- Destinataire : Administrateur
 -- Intérêt : Utile pour faire des statistiques sur les regions
 
+
+-- GROUP BY HAVING --
+
 SELECT code, MIN(tarifBaseChambre) AS "tarifMin"
 FROM HEBERGEMENT
 GROUP BY code
@@ -44,6 +40,27 @@ HAVING MIN(tarifBaseChambre) < 50;
 -- Récupère les hébergements proposant des chambres à un tarif minimum de moins de 50€
 -- Destinataire : Client
 -- Intérêt : Permet au client de savoir quells hébergements proposent des chambres à moins de 50€
+
+
+-- Fontions d'agrégation --
+
+SELECT COUNT(DISTINCT c.code) AS "nbClients"
+FROM CLIENT c
+JOIN RESERVATION r ON c.code=r.codeClient
+JOIN SEJOUR s ON r.codeSejour=s.code
+WHERE s.lieu = 'Larrau';
+-- Calcule le nombre de clients ayant réservé un séjour a Larrau
+-- Destinataire : Adhérent
+-- Intérêt : Permet d'avoir une idée de l'intérêt des clients pour les sejours à Larrau
+
+SELECT MIN(montant) AS prixMin, MAX(montant) AS prixMax
+FROM PAIEMENT;
+-- Récupère les montants minimum et maxmimum payés
+-- Destinataire : administrateur
+-- Intérêt : Permet davoir une fourchette des prix payés par les clients 
+
+
+-- Sous requètes --
 
 SELECT code
 FROM HEBERGEMENT
