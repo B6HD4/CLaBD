@@ -27,23 +27,20 @@ WHERE C.nom = 'Durand';
 
 -- ORDER BY --
 
--- 3 : 
+-- 3 : Organiser les hébergements
 SELECT h.CODE, h.NOMPROP, h.CODEEPI, e.CODE, e.DESCRIPTION, h.TARIFBASECHAMBRE
 FROM HEBERGEMENT h
 INNER JOIN EPI e ON h.CODEEPI = e.CODE
 ORDER BY e.CODE DESC, h.TARIFBASECHAMBRE ASC;
 -- Destinataire : Un client
 -- Interêt : Permet de trier les hébergements de manière décroissante en fonction du nombre d'épis et par prix croissant.
--- OK
 
-
--- 4 :
+-- 4 : Organiser les hébergements par prix
 SELECT CODE, TARIFBASECHAMBRE AS "TARIF", TARIFBASELITSUP,CAPACITE
 FROM HEBERGEMENT
 ORDER BY TARIF ASC;
 -- Destinataire : Un client
 -- Interêt : Permet de trier le prix des hébergements en fonction du tarifs des chambres de manière croissante.
--- OK
 
 
 -- GROUP BY --
