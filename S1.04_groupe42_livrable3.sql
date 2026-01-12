@@ -27,32 +27,25 @@ WHERE C.nom = 'Durand';
 
 -- ORDER BY --
 
--- 3 : 
+-- 3 : Organiser les hébergements
 SELECT h.CODE, h.NOMPROP, h.CODEEPI, e.CODE, e.DESCRIPTION, h.TARIFBASECHAMBRE
 FROM HEBERGEMENT h
 INNER JOIN EPI e ON h.CODEEPI = e.CODE
 ORDER BY e.CODE DESC, h.TARIFBASECHAMBRE ASC;
 -- Destinataire : Un client
 -- Interêt : Permet de trier les hébergements de manière décroissante en fonction du nombre d'épis et par prix croissant.
--- OK
 
-
--- 4 :
+-- 4 : Organiser les hébergements par prix
 SELECT CODE, TARIFBASECHAMBRE AS "TARIF", TARIFBASELITSUP,CAPACITE
 FROM HEBERGEMENT
 ORDER BY TARIF ASC;
 -- Destinataire : Un client
 -- Interêt : Permet de trier le prix des hébergements en fonction du tarifs des chambres de manière croissante.
--- OK
 
 
 -- GROUP BY --
 
-<<<<<<< HEAD
--- 5 : Nombre de chambres par hébergement
-=======
 -- 5 : Nombre de chambre par hébergement 
->>>>>>> 3605ff4 (Refactor SQL queries and comments in livrable3)
 SELECT h.code, COUNT(c.code) AS nbChambre
 FROM HEBERGEMENT h
 JOIN CHAMBRE c ON h.code=c.codeHeberg
@@ -61,11 +54,7 @@ GROUP BY h.code;
 -- Destinataire : Administrateur
 -- Intérêt : Utile pour faire des statistiques sur les hébergements
 
-<<<<<<< HEAD
--- 6 : Nombre d'hébergement par commune
-=======
 -- 6 : Nombre d'hébergements par commune
->>>>>>> 3605ff4 (Refactor SQL queries and comments in livrable3)
 SELECT c.code, COUNT(h.code) AS nbHebergements
 FROM COMMUNE c
 JOIN HEBERGEMENT h ON c.code=h.codeCommune
@@ -74,11 +63,7 @@ GROUP BY c.code;
 -- Destinataire : Administrateur
 -- Intérêt : Utile pour faire des statistiques sur les communes
 
-<<<<<<< HEAD
--- 7 : Nombre de commune par région
-=======
 -- 7 : Nombre de communes par région
->>>>>>> 3605ff4 (Refactor SQL queries and comments in livrable3)
 SELECT r.code, COUNT(c.code) AS nbCommune
 FROM REGION r
 JOIN COMMUNE c ON r.code=c.codeRegion
@@ -90,11 +75,7 @@ GROUP BY r.code;
 
 -- GROUP BY HAVING --
 
-<<<<<<< HEAD
--- 8 : Hebergements à moins de 50 euros
-=======
 -- 8 : Hébergement à moins de 50€
->>>>>>> 3605ff4 (Refactor SQL queries and comments in livrable3)
 SELECT code, MIN(tarifBaseChambre) AS "tarifMin" -- Y V E S
 FROM HEBERGEMENT
 GROUP BY code
@@ -128,11 +109,7 @@ HAVING AVG(h.TARIFBASECHAMBRE) < 150;
 
 -- Fontions d'agrégation --
 
-<<<<<<< HEAD
 -- 11 : Nombre de clients à Larrau
-=======
--- 11 : Nombres clients à larrau
->>>>>>> 3605ff4 (Refactor SQL queries and comments in livrable3)
 SELECT COUNT(DISTINCT c.code) AS "nbClients"
 FROM CLIENT c
 JOIN RESERVATION r ON c.code=r.codeClient
@@ -174,9 +151,7 @@ AND h.CODE NOT IN (
     FROM HEBERGEMENT h
     WHERE h.TARIFBASECHAMBRE > 200);
 -- Destinataire : Un client
--- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à
-<<<<<<< HEAD
--- 1, le prix inférieur à 200 et trier par région.
+-- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à 1, le prix inférieur à 200 et trier par région.
 
 -- 15 : Hebergements de la même ville
 SELECT code 
@@ -209,10 +184,3 @@ WHERE c.CODE IN (
   ORDER BY c.CODEREGION, c.CODE, h.CODE;
 -- Destinataire : Un client
 -- Intérêt : Tri les hébergement par commune et par région. 
-
-
-=======
--- 1, le prix inférieur à 200 et trier par région. 
-
--- OK
-
