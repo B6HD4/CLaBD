@@ -29,6 +29,16 @@ WHERE C.nom = 'Durand';
 
 -- ** 3 GROUP BY HAVING dont 1 avec sous-requête dans le HAVING (critere dynamique) (Bixente, Cédric, Thibaut)
 
+SELECT H.code, COUNT(C.code) AS nbDeChambres
+FROM HEBERGEMENT H
+JOIN CHAMBRE C ON C.codeHeberg = H.code
+GROUP BY H.code
+HAVING COUNT(C.code) >= (SELECT ROUND(AVG(R.NBREPERS))
+FROM RESERVATION R
+JOIN CLIENT C ON C.code = R.CODECLIENT
+WHERE C.nom = 'Durand');
+-- lister les hebergements qui ont un nombre de chambres superieur ou egal au reservation deja passé au nom de durant.
+
 -- ** Fonctions d’agrégation : 2 requêtes avec une ou plusieurs fonctions d’agrégation (MIN, MAX, etc.) (Bixente)
 
 -- ** Sous-requêtes : 4 requêtes utilisant au niveau de l’imbrication des opérateurs de comparaison ainsi que les prédicats IN et NOT IN
