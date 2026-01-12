@@ -44,6 +44,7 @@ ORDER BY TARIF ASC;
 
 -- GROUP BY --
 
+-- 5 : Nombre de chambre par hébergement 
 SELECT h.code, COUNT(c.code) AS nbChambre
 FROM HEBERGEMENT h
 JOIN CHAMBRE c ON h.code=c.codeHeberg
@@ -52,6 +53,7 @@ GROUP BY h.code;
 -- Destinataire : Administrateur
 -- Intérêt : Utile pour faire des statistiques sur les hébergements
 
+-- 6 : Nombre d'hébergements par commune
 SELECT c.code, COUNT(h.code) AS nbHebergements
 FROM COMMUNE c
 JOIN HEBERGEMENT h ON c.code=h.codeCommune
@@ -60,6 +62,7 @@ GROUP BY c.code;
 -- Destinataire : Administrateur
 -- Intérêt : Utile pour faire des statistiques sur les communes
 
+-- 7 : Nombre de communes par région
 SELECT r.code, COUNT(c.code) AS nbCommune
 FROM REGION r
 JOIN COMMUNE c ON r.code=c.codeRegion
@@ -71,6 +74,7 @@ GROUP BY r.code;
 
 -- GROUP BY HAVING --
 
+-- 8 : Hébergement à moins de 50€
 SELECT code, MIN(tarifBaseChambre) AS "tarifMin" -- Y V E S
 FROM HEBERGEMENT
 GROUP BY code
@@ -101,6 +105,7 @@ HAVING AVG(h.TARIFBASECHAMBRE) < 150;
 
 -- Fontions d'agrégation --
 
+-- 11 : Nombres clients à larrau
 SELECT COUNT(DISTINCT c.code) AS "nbClients"
 FROM CLIENT c
 JOIN RESERVATION r ON c.code=r.codeClient
@@ -110,6 +115,7 @@ WHERE s.lieu = 'Larrau';
 -- Destinataire : Adhérent
 -- Intérêt : Permet d'avoir une idée de l'intérêt des clients pour les sejours à Larrau
 
+-- 12 : Prix minimum/maximum
 SELECT MIN(montant) AS prixMin, MAX(montant) AS prixMax
 FROM PAIEMENT;
 -- Récupère les montants minimum et maxmimum payés
@@ -140,4 +146,5 @@ AND h.CODE NOT IN (
 -- Destinataire : Un client
 -- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à
 -- 1, le prix inférieur à 200 et trier par région. 
+
 -- OK
