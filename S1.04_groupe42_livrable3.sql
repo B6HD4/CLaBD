@@ -45,12 +45,11 @@ ORDER BY TARIF ASC;
 
 -- GROUP BY --
 
--- 5 : Nombre de chambre par hébergement 
+-- 5 : Nombre de chambres par hébergement 
 SELECT h.code, COUNT(c.code) AS nbChambre
 FROM HEBERGEMENT h
 JOIN CHAMBRE c ON h.code=c.codeHeberg
 GROUP BY h.code;
--- Calcule le nombre de chambres par hébergement
 -- Destinataire : Administrateur
 -- Intérêt : Utile pour faire des statistiques sur les hébergements
 
@@ -59,7 +58,6 @@ SELECT c.code, COUNT(h.code) AS nbHebergements
 FROM COMMUNE c
 JOIN HEBERGEMENT h ON c.code=h.codeCommune
 GROUP BY c.code;
--- Calcule le nombre d'hebergements par commune
 -- Destinataire : Administrateur
 -- Intérêt : Utile pour faire des statistiques sur les communes
 
@@ -68,7 +66,6 @@ SELECT r.code, COUNT(c.code) AS nbCommune
 FROM REGION r
 JOIN COMMUNE c ON r.code=c.codeRegion
 GROUP BY r.code;
--- Calcule le nombre de communes par region
 -- Destinataire : Administrateur
 -- Intérêt : Utile pour faire des statistiques sur les regions
 
@@ -76,11 +73,10 @@ GROUP BY r.code;
 -- GROUP BY HAVING --
 
 -- 8 : Hébergement à moins de 50€
-SELECT code, MIN(tarifBaseChambre) AS "tarifMin" -- Y V E S
+SELECT code, MIN(tarifBaseChambre) AS "tarifMin"
 FROM HEBERGEMENT
 GROUP BY code
 HAVING MIN(tarifBaseChambre) < 50;
--- Récupère les hébergements proposant des chambres à un tarif minimum de moins de 50€
 -- Destinataire : Client
 -- Intérêt : Permet au client de savoir quells hébergements proposent des chambres à moins de 50€
 
@@ -97,7 +93,7 @@ WHERE C.nom = 'Durand');
 -- Destinataire : Client
 -- Interêt : Lister les hébergements qui ont un nombre de chambres supérieur ou égal aux réservations déjà passé au nom de Durand.
 
--- 10 : Regroupe les hebergements par prix moyen et par communes
+-- 10 : Regroupe les hebergements par prix moyen et par commune
 SELECT h.CODECOMMUNE, AVG(h.TARIFBASECHAMBRE) AS tarif_moyen
 FROM HEBERGEMENT h
 INNER JOIN COMMUNE c ON h.CODECOMMUNE = c.CODE
@@ -115,64 +111,19 @@ FROM CLIENT c
 JOIN RESERVATION r ON c.code=r.codeClient
 JOIN SEJOUR s ON r.codeSejour=s.code
 WHERE s.lieu = 'Larrau';
--- Calcule le nombre de clients ayant réservé un séjour a Larrau
 -- Destinataire : Adhérent
 -- Intérêt : Permet d'avoir une idée de l'intérêt des clients pour les sejours à Larrau
 
 -- 12 : Prix minimum/maximum
 SELECT MIN(montant) AS prixMin, MAX(montant) AS prixMax
 FROM PAIEMENT;
--- Récupère les montants minimum et maxmimum payés
 -- Destinataire : administrateur
 -- Intérêt : Permet davoir une fourchette des prix payés par les clients 
 
 
 -- Sous requètes --
 
--- 13 : Regroupe les hebergements
-SELECT code -- Y V E S
-FROM HEBERGEMENT
-WHERE codeCommune IN (SELECT codeCommune
-                      FROM HEBERGEMENT
-                      WHERE code='M18');
--- Récupère le code des hébergements dans la même ville que "M18"
--- Destinataire : Client
--- Intérêt : Si un hébergement n'a pas assez de place, permet à l'utilisateur de connaitre les autres hébergements de la même ville pour pouvoir y réserver des chambres
-
-
--- 14 : Ordonner les hebergements
-SELECT h.CODE, h.CODECOMMUNE, h.CODEEPI, c.CODE AS CODE_COMMUNE, e.CODE AS CODE_EPI -- thib
-FROM HEBERGEMENT h
-INNER JOIN EPI e ON h.CODEEPI = e.CODE
-INNER JOIN COMMUNE c ON h.CODECOMMUNE = c.CODE
-WHERE h.CODEEPI > 2
-AND h.CODE NOT IN (
-    SELECT h.CODE
-    FROM HEBERGEMENT h
-    WHERE h.TARIFBASECHAMBRE > 200);
--- Destinataire : Un client
--- Interêt : Tri un hébergement en fonction de plusieur critère sélectionner, l'épi doit être supérieur à 1, le prix inférieur à 200 et trier par région.
-
--- 15 : Hebergements de la même ville
-SELECT code 
-FROM HEBERGEMENT
-WHERE codeCommune IN (SELECT codeCommune
-                    FROM HEBERGEMENT
-                    WHERE code='M18');
--- Destinataire : 
--- Intérêt : 
-
--- 16 : Clients sans reservation
-SELECT C.nom
-FROM CLIENT C
-WHERE C.code NOT IN (
-    SELECT R.codeClient
-    FROM RESERVATION R
-    WHERE R.codeClient IS NOT NULL);
--- Destinataire : Propriétaires
--- Intérêt : Mettre en avant une inscription de client qui n'a jamais reservé
-
-
+-- 13 : Ordonner les hebergements
 SELECT h.CODE, h.CODECOMMUNE, c.CODE, c.CODEREGION
 FROM HEBERGEMENT h
 INNER JOIN COMMUNE c ON h.CODECOMMUNE = c.CODE
@@ -183,4 +134,37 @@ WHERE c.CODE IN (
     WHERE r.CODE = 1)
   ORDER BY c.CODEREGION, c.CODE, h.CODE;
 -- Destinataire : Un client
--- Intérêt : Tri les hébergement par commune et par région. 
+-- Intérêt : Tri les hébergements par commune et par région.
+
+
+-- 14 : Regroupe les hebergements
+SELECT h.CODE, h.CODECOMMUNE, h.CODEEPI, c.CODE AS CODE_COMMUNE, e.CODE AS CODE_EPI
+FROM HEBERGEMENT h
+INNER JOIN EPI e ON h.CODEEPI = e.CODE
+INNER JOIN COMMUNE c ON h.CODECOMMUNE = c.CODE
+WHERE h.CODEEPI > 2
+AND h.CODE NOT IN (
+    SELECT h.CODE
+    FROM HEBERGEMENT h
+    WHERE h.TARIFBASECHAMBRE > 200);
+-- Destinataire : Un client
+-- Interêt : Tri un hébergement en fonction de plusieurs critères sélectionnés, l'épi doit être supérieur à 1, le prix inférieur à 200 et trier par région.
+
+-- 15 : Hebergements de la même ville
+SELECT code 
+FROM HEBERGEMENT
+WHERE codeCommune IN (SELECT codeCommune
+                    FROM HEBERGEMENT
+                    WHERE code='M18');
+-- Destinataire : Client
+-- Intérêt : Si un hébergement n'a pas assez de place, permet à l'utilisateur de connaitre les autres hébergements de la même ville pour pouvoir y réserver des chambres.
+
+-- 16 : Clients sans reservation
+SELECT C.nom
+FROM CLIENT C
+WHERE C.code NOT IN (
+    SELECT R.codeClient
+    FROM RESERVATION R
+    WHERE R.codeClient IS NOT NULL);
+-- Destinataire : Propriétaires
+-- Intérêt : Mettre en avant une inscription de client qui n'a jamais reservé
